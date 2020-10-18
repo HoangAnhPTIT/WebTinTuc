@@ -17,16 +17,18 @@ public class NewsDAO extends AbstractDAO<NewsModel> implements INewsDAO<NewsMode
 	@Override
 	public Long save(NewsModel newsModel) {
 		StringBuilder sql = new StringBuilder("INSERT INTO news ");
-		sql.append("(title, content, categoryid) ");
-		sql.append("VALUES(?, ?, ?)");
-		return insert(sql.toString(), newsModel.getTitle(), newsModel.getContent(), newsModel.getCategoryId());
+		sql.append("(title, content, categoryid, thumbnail, shortdescription, ");
+		sql.append("createddate, createdby) ");
+		sql.append("VALUES(?, ?, ?, ?, ?, ?, ?)");
+		return insert(sql.toString(), newsModel.getTitle(), newsModel.getContent(), newsModel.getCategoryId(),
+				newsModel.getThumbnail(), newsModel.getShortDescription(), newsModel.getCreateDate(), newsModel.getCreateBy());
 
 	}
 
 	@Override
 	public List<NewsModel> findAll() {
 		String sql = "SELECT * FROM news";
-		List<NewsModel> news = query(sql, new NewsMapper());
+		List<NewsModel> news = query(sql, new NewsMapper()); 
 		return news;
 	}
 

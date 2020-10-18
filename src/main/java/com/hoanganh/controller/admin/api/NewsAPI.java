@@ -44,7 +44,12 @@ public class NewsAPI extends HttpServlet {
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		ObjectMapper mapper = new ObjectMapper();
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json");
+		NewsModel newsModel = HttpUtil.of(request.getReader()).toModel(NewsModel.class);
+		newsService.delete(newsModel.getIds());
+		mapper.writeValue(response.getOutputStream(), "{}");
 	}
 
 //	private void saveOrUpdate() {

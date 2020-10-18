@@ -1,5 +1,6 @@
 package com.hoanganh.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,11 +9,11 @@ import com.hoanganh.dao.INewsDAO;
 import com.hoanganh.model.NewsModel;
 import com.hoanganh.service.INewsService;
 
-public class NewsService implements INewsService{
+public class NewsService implements INewsService {
 
 	@Inject
-	private INewsDAO newsDAO;	 
-	
+	private INewsDAO newsDAO;
+
 	@Override
 	public List<NewsModel> findByCategoryId(Long categoryId) {
 		return newsDAO.findByCategoryId(categoryId);
@@ -20,6 +21,8 @@ public class NewsService implements INewsService{
 
 	@Override
 	public NewsModel save(NewsModel newsModel) {
+		newsModel.setCreateDate(new Timestamp(System.currentTimeMillis()));
+		newsModel.setCreateBy("");
 		Long newId = newsDAO.save(newsModel);
 		return newsDAO.findOne(newId);
 	}
@@ -27,6 +30,8 @@ public class NewsService implements INewsService{
 	@Override
 	public NewsModel update(NewsModel updateNews) {
 		NewsModel oldNews = newsDAO.findOne(updateNews.getId());
+		updateNews.setModifiedDate(new Timestamp(System.currentTimeMillis()));
+		updateNews.setModifiedBy("");
 		updateNews.setCreateDate(oldNews.getCreateDate());
 		updateNews.setCreateBy(oldNews.getCreateBy());
 		newsDAO.update(updateNews);
@@ -34,15 +39,16 @@ public class NewsService implements INewsService{
 	}
 
 	@Override
-	public void delete(Long id) {
-		newsDAO.delete(id);
-		
+	public void delete(Long[] ids) {
+		for (Long id : ids) {
+			newsDAO.delete(id);
+		}
+
 	}
 
 	@Override
 	public List<NewsModel> findAll() {
 		return newsDAO.findAll();
 	}
-	
-	
+
 }

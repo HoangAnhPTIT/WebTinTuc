@@ -1,12 +1,12 @@
-<%@ include file="/common/taglib.jsp" %>
+<%@ include file="/common/taglib.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>Danh Sách Bài Viết</title>
+<meta charset="UTF-8">
+<title>Danh Sách Bài Viết</title>
 </head>
 
 <body>
@@ -26,31 +26,34 @@
 							<table class="table">
 								<thead>
 									<tr>
-									  <th>Tên bài viết</th>
-									  <th>Mô tả ngắn</th>
+										<th>Tên bài viết</th>
+										<th>Mô tả ngắn</th>
 									</tr>
-								  </thead>
-								  <tbody>
-									<tr>
-									  <td>John</td>
-									  <td>Doe</td>
-								  
-									</tr>
-								</tbody>
-							  </table>
-							  <nav aria-label="Page navigation">
+
+								</thead>
+								<tbody>
+									<c:forEach var="item" items="${model.listResults}">
+										<tr>
+											<td>${item.title}</td>		
+											<td>${item.shortDescription}</td>
+										</tr>
+									</c:forEach>
+
+								</tbody>	
+							</table>
+							<nav aria-label="Page navigation">
 								<!-- <ul class="pagination" id="pagination"></ul> -->
 							</nav>
-							  
+
 						</div>
-						
+
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- /.main-content -->
-<!-- 	<script type="text/javascript">
+	<!-- 	<script type="text/javascript">
 		$(function () {
 			window.pagObj = $('#pagination').twbsPagination({
 				totalPages: 10,
