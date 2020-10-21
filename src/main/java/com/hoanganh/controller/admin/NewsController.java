@@ -24,7 +24,23 @@ public class NewsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		NewsModel model = new NewsModel();
-		model.setListResults(newsService.findAll());
+		String pageStr = request.getParameter("page");
+		String maxPageItemStr = request.getParameter("maxPageItem");
+		if (pageStr != null) {
+			model.setPage(Integer.parseInt(pageStr));
+		} else {
+			model.setPage(1);
+		}
+		if (maxPageItemStr != null) {
+			model.setMaxPageItem(Integer.parseInt(maxPageItemStr));
+		} else {
+			model.setMaxPageItem(1);
+		}
+		Integer offset = (model.getPage() - 1) * model.getMaxPageItem();
+		model.setListResults(newsService.findAll(offset, model.getMaxPageItem()));
+		model.setTotalItem(newsService.getTotalItem());
+		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getMaxPageItem()));
+
 		request.setAttribute(SystemConstant.MODEL, model);
 
 		RequestDispatcher rd = request.getRequestDispatcher("view/admin/news/list.jsp");
