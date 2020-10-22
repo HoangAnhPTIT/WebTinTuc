@@ -21,10 +21,9 @@
 				<div class="d-flex justify-content-center form_container">
 					<form action='<c:url value = "dang-nhap"/>' id="formLogin"
 						method="POST">
-						<div class="alert alert-${alert}">
-							${message}
-						</div>
-
+						<c:if test="${not empty message}">
+							<div class="alert alert-${alert}">${message}</div>
+						</c:if>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
