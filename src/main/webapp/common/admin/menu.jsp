@@ -35,7 +35,7 @@
 	</div>
     <ul class="nav nav-list">
         <li >
-            <a href='<c:url value="/admin-new"/>' class="dropdown-toggle">
+            <a href='<c:url value="/admin-new?type=list"/>' class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
                 Quản lý bài viết

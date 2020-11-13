@@ -3,6 +3,7 @@ package com.hoanganh.model;
 public class UserModel extends AbstractModel<UserModel> {
 	private String userName;
 	private String password;
+	private String passwordConfirm;
 	private String fullName;
 	private int status;
 	private Long roleId;
@@ -54,6 +55,14 @@ public class UserModel extends AbstractModel<UserModel> {
 
 	public void setRoleId(Long roleId) {
 		this.roleId = roleId;
+	}
+
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
 	}
 
 }

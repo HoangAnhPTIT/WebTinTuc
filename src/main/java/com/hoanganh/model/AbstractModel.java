@@ -11,8 +11,14 @@ public class AbstractModel<T>{
 	private Timestamp createdDate;
 	private Timestamp modifiedDate;
 	private List<T> listResult = new ArrayList<>();
+	private String type;
 	
-	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	public List<T> getListResult() {
 		return listResult;
 	}

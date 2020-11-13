@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hoanganh.model.NewsModel;
+import com.hoanganh.model.UserModel;
 import com.hoanganh.service.INewsService;
 import com.hoanganh.utils.HttpUtil;
+import com.hoanganh.utils.SessionUtil;
 
 @WebServlet(urlPatterns = { "/api-new" })
 public class NewsAPI extends HttpServlet {
@@ -27,6 +29,7 @@ public class NewsAPI extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		NewsModel model = HttpUtil.of(request.getReader()).toModel(NewsModel.class);
+		model.setCreatedBy(((UserModel) SessionUtil.getInstance().getValue(request, "MODEL")).getUserName());
 		model = newsService.save(model);
 		mapper.writeValue(response.getOutputStream(), model);
 	}
@@ -37,6 +40,7 @@ public class NewsAPI extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json");
 		NewsModel model = HttpUtil.of(request.getReader()).toModel(NewsModel.class);
+//		model.setModifiedBy(((UserModel) SessionUtil.getInstance().getValue(request, "MODEL")).getUserName());
 		newsService.update(model);
 		NewsModel modelUpdated = newsService.findOne(model.getId());
 		mapper.writeValue(response.getOutputStream(), modelUpdated);

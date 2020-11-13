@@ -7,4 +7,5 @@ import com.hoanganh.model.UserModel;
 public interface IUserService {
 	List<UserModel> findAll();
 	UserModel findByUsernameAndPassword(String userName, String password);
+	UserModel save(UserModel userModel);
 }

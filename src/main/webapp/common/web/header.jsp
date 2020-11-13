@@ -19,7 +19,7 @@
 				<c:if test="${empty MODEL}">
 					<li class="nav-item"><a class="nav-link"
 						href="<c:url value='/dang-nhap' />">Đăng nhập</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Đăng ký</a></li>
+					<li class="nav-item"><a class="nav-link" href="<c:url value='/dang-ky?action=register' />">Đăng ký</a></li>
 				</c:if>
 				<c:if test = "${not empty MODEL}">
 					<li class="nav-item"><a class="nav-link" href="#">${MODEL.fullName}</a></li>

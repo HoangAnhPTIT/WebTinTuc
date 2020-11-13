@@ -15,7 +15,7 @@ import com.hoanganh.service.IUserService;
 import com.hoanganh.utils.FormUtil;
 import com.hoanganh.utils.SessionUtil;
 
-@WebServlet(urlPatterns = { "/trang-chu", "/dang-nhap", "/thoat" })
+@WebServlet(urlPatterns = { "/trang-chu", "/dang-nhap", "/thoat", "/dang-ky" })
 public class HomeController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -39,7 +39,12 @@ public class HomeController extends HttpServlet {
 			SessionUtil.getInstance().removeValue(request, "MODEL");
 			RequestDispatcher rd = request.getRequestDispatcher("views/web/home.jsp");
 			rd.forward(request, response);
-		} else {
+		} else if(action != null && action.equals("register")) {
+			RequestDispatcher rd = request.getRequestDispatcher("views/register.jsp");
+			rd.forward(request, response);
+		}
+		
+		else {
 			RequestDispatcher rd = request.getRequestDispatcher("views/web/home.jsp");
 			rd.forward(request, response);
 		}
@@ -68,6 +73,10 @@ public class HomeController extends HttpServlet {
 						+ "/dang-nhap?action=login&message=Username Or Password Not Exist&alert=danger");
 			}
 
+		} else if(action != null && action.equals("register")) {
+			UserModel userRegister = FormUtil.toModel(UserModel.class, request);
+			
+			
 		}
 	}
 }

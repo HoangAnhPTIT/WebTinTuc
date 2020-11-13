@@ -1,5 +1,6 @@
 package com.hoanganh.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,6 +20,15 @@ public class UserService implements IUserService {
 	@Override
 	public UserModel findByUsernameAndPassword(String userName, String password) {
 		return userDAO.findByUsernameAndPassword(userName, password);
+	}
+
+	@Override
+	public UserModel save(UserModel userModel) {
+		
+		userModel.setModifiedBy("");
+		userModel.setModifiedDate(new Timestamp(System.currentTimeMillis()));
+		Long id = userDAO.save(userModel);
+		return userDAO.findOne(id);
 	}
 
 
